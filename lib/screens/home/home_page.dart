@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       // await Future.delayed(const Duration(seconds: 3), () {});
 
       final response =
-          await _dio.get('https://jsonplaceholder.typicode.com/todos');
+          await _dio.get('https://jsonplaceholder.typicode.com/albums');
       debugPrint(response.data.toString());
       // parse
       List list = jsonDecode(response.data.toString());
@@ -74,17 +74,23 @@ class _HomePageState extends State<HomePage> {
             return Card(
                 child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Row(children: [
-                      Expanded(child: Text(todoItem.title)),
-                      Checkbox(
-                          value: todoItem.completed,
-                          onChanged: (newValue) {
-                            setState(() {
-                              todoItem.completed = newValue!;
-                            });
-                          })
-                    ])));
+                    child: Column(
+
+                      children: [
+                        Row(children: [
+                          Expanded(child: Text(todoItem.title)),
+
+                        ]),
+                        Row(
+                          children: [
+                            Text("Album ID:"+" "+todoItem.id.toString()+" "),
+                            Text("User ID:"+" "+todoItem.userId.toString()),
+                          ],
+                        ),
+                      ],
+                    )));
           });
+
     }
 
     return Scaffold(body: body);
